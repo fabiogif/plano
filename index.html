@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de PowerPoint - Moday Restaurante</title>
+    <title>Plano de Negócios - Moday Restaurante</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,19 +22,27 @@
             background-color: #e2e8f0;
         }
         .slide-thumbnail {
-            border: 2px solid transparent;
-            transition: border-color 0.3s, transform 0.3s;
+            border: 2px solid #cbd5e1;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+        }
+        .slide-thumbnail:hover {
+            border-color: var(--accent-2);
+            transform: scale(1.02);
         }
         .slide-thumbnail.active {
             border-color: var(--accent-1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transform: scale(1.05);
         }
         .slide-main {
             display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
         }
         .slide-main.active {
             display: flex;
+            opacity: 1;
         }
         .chart-container {
             position: relative;
@@ -52,13 +60,13 @@
             font-size: 0.8rem;
         }
         .table-custom th, .table-custom td {
-            padding: 8px 10px;
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
         }
         .table-custom th {
-            background-color: #f3f4f6;
-            font-weight: 600;
+            background-color: #f8fafc;
+            font-weight: 700;
             color: var(--primary-color);
         }
     </style>
@@ -66,15 +74,15 @@
 <body class="flex h-screen bg-gray-200">
 
     <!-- Sidebar de Miniaturas -->
-    <aside class="w-1/4 h-full bg-gray-100 p-4 overflow-y-auto shadow-lg">
-        <h2 class="text-lg font-bold mb-4 text-gray-700">Slides</h2>
+    <aside class="w-1/4 h-full bg-white p-4 overflow-y-auto shadow-xl z-10">
+        <h2 class="text-xl font-extrabold mb-4" style="color:var(--primary-color)">Apresentação</h2>
         <div id="thumbnail-container" class="space-y-4">
             <!-- As miniaturas serão geradas pelo JS -->
         </div>
     </aside>
 
     <!-- Área Principal do Slide -->
-    <main id="main-slide-container" class="w-3/4 h-full bg-white shadow-inner flex items-center justify-center p-8">
+    <main id="main-slide-container" class="w-3/4 h-full bg-gray-50 shadow-inner flex items-center justify-center p-8">
         <!-- Os slides principais serão injetados aqui -->
     </main>
 
@@ -84,126 +92,126 @@
                 {
                     title: "Título",
                     content: `<div class="text-center">
-                                <h1 class="text-5xl font-extrabold" style="color: var(--primary-color);">Moday Restaurante</h1>
+                                <h1 class="text-6xl font-extrabold" style="color: var(--primary-color);">Moday Restaurante</h1>
                                 <p class="text-2xl mt-4" style="color: var(--neutral-dark);">Análise de Mercado e Plano de Negócios</p>
                              </div>`
                 },
                 {
                     title: "Visão Geral do Mercado",
-                    content: `<div class="text-center">
-                                <h2 class="text-3xl font-bold mb-4" style="color: var(--primary-color);">Oportunidade de Mercado em Salvador</h2>
-                                <p class="max-w-3xl mx-auto mb-6 text-sm text-gray-600">O setor de delivery de alimentos segue em forte crescimento, moldado por novos hábitos de consumo e pela digitalização. O Moday Restaurante nasce para atender à demanda por refeições práticas, saborosas e com excelente custo-benefício na capital baiana.</p>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">🎯 Público-Alvo</h3><p class="text-xs mt-1 text-gray-700">Jovens, profissionais e famílias que valorizam praticidade e qualidade.</p></div>
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">📈 Tendência</h3><p class="text-xs mt-1 text-gray-700">Crescente valorização da culinária oriental e consolidação dos apps de entrega.</p></div>
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">⚔️ Competição</h3><p class="text-xs mt-1 text-gray-700">Mercado competitivo com players estabelecidos. O diferencial será a qualidade artesanal.</p></div>
+                    content: `<div class="text-center w-full">
+                                <h2 class="text-4xl font-bold mb-6" style="color: var(--primary-color);">Oportunidade de Mercado em Salvador</h2>
+                                <p class="max-w-4xl mx-auto mb-8 text-gray-600">O setor de delivery de alimentos segue em forte crescimento, moldado por novos hábitos de consumo e pela digitalização. O Moday Restaurante nasce para atender à demanda por refeições práticas, saborosas e com excelente custo-benefício na capital baiana.</p>
+                                <div class="grid grid-cols-3 gap-6">
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">🎯 Público-Alvo</h3><p class="text-sm mt-2 text-gray-700">Jovens, profissionais e famílias que valorizam praticidade e qualidade.</p></div>
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">📈 Tendência</h3><p class="text-sm mt-2 text-gray-700">Crescente valorização da culinária oriental e consolidação dos apps de entrega.</p></div>
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">⚔️ Competição</h3><p class="text-sm mt-2 text-gray-700">Mercado competitivo com players estabelecidos. O diferencial será a qualidade artesanal.</p></div>
                                 </div>
                             </div>`
                 },
                 {
                     title: "Análise SWOT",
                     content: `<div class="text-center w-full">
-                                <h2 class="text-3xl font-bold mb-4" style="color: var(--primary-color);">Análise Estratégica SWOT</h2>
-                                <p class="max-w-3xl mx-auto mb-6 text-sm text-gray-600">Identificamos nossos pontos fortes, fraquezas, oportunidades e ameaças para traçar um caminho estratégico sólido.</p>
-                                <div class="grid grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-green-100 p-4 rounded-lg"><h3 class="font-bold text-green-800">Forças</h3><ul class="list-disc list-inside text-left"><li>Cardápio atrativo e artesanal</li><li>Baixo custo fixo operacional</li><li>Identidade visual própria</li></ul></div>
-                                    <div class="bg-red-100 p-4 rounded-lg"><h3 class="font-bold text-red-800">Fraquezas</h3><ul class="list-disc list-inside text-left"><li>Marca nova no mercado</li><li>Necessidade de investimento em marketing</li></ul></div>
-                                    <div class="bg-blue-100 p-4 rounded-lg"><h3 class="font-bold text-blue-800">Oportunidades</h3><ul class="list-disc list-inside text-left"><li>Expansão do mercado de delivery</li><li>Fidelização via redes sociais</li></ul></div>
-                                    <div class="bg-orange-100 p-4 rounded-lg"><h3 class="font-bold text-orange-800">Ameaças</h3><ul class="list-disc list-inside text-left"><li>Alta concorrência nos apps</li><li>Variação de preço dos insumos</li></ul></div>
+                                <h2 class="text-4xl font-bold mb-6" style="color: var(--primary-color);">Análise Estratégica SWOT</h2>
+                                <p class="max-w-4xl mx-auto mb-8 text-gray-600">Identificamos nossos pontos fortes, fraquezas, oportunidades e ameaças para traçar um caminho estratégico sólido.</p>
+                                <div class="grid grid-cols-2 gap-6 text-sm">
+                                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg"><h3 class="font-bold text-lg text-green-800 mb-2">✅ Forças</h3><ul class="list-disc list-inside text-left space-y-1"><li>Cardápio atrativo e artesanal</li><li>Baixo custo fixo operacional</li><li>Identidade visual própria</li></ul></div>
+                                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg"><h3 class="font-bold text-lg text-red-800 mb-2">❌ Fraquezas</h3><ul class="list-disc list-inside text-left space-y-1"><li>Marca nova no mercado</li><li>Necessidade de investimento em marketing</li></ul></div>
+                                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg"><h3 class="font-bold text-lg text-blue-800 mb-2">💡 Oportunidades</h3><ul class="list-disc list-inside text-left space-y-1"><li>Expansão do mercado de delivery</li><li>Fidelização via redes sociais</li></ul></div>
+                                    <div class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg"><h3 class="font-bold text-lg text-orange-800 mb-2">⚠️ Ameaças</h3><ul class="list-disc list-inside text-left space-y-1"><li>Alta concorrência nos apps</li><li>Variação de preço dos insumos</li></ul></div>
                                 </div>
                              </div>`
                 },
                 {
                     title: "Marketing 4P's",
                     content: `<div class="text-center w-full">
-                                <h2 class="text-3xl font-bold mb-4" style="color: var(--primary-color);">Estratégia de Marketing 4P's</h2>
-                                <p class="max-w-3xl mx-auto mb-6 text-sm text-gray-600">Nossa abordagem integrada para criar uma marca forte, com produtos de qualidade, preços justos, distribuição eficiente e promoção digital inteligente.</p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">Produto</h3><p class="text-xs mt-1 text-gray-700">Comida chinesa de qualidade, com foco em sabor, apresentação e itens exclusivos.</p></div>
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">Preço</h3><p class="text-xs mt-1 text-gray-700">Acessível com combos promocionais para gerar valor percebido e fidelizar clientes.</p></div>
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">Praça</h3><p class="text-xs mt-1 text-gray-700">Atendimento 100% digital via iFood, WhatsApp e Instagram.</p></div>
-                                    <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold text-md" style="color:var(--primary-color);">Promoção</h3><p class="text-xs mt-1 text-gray-700">Campanhas visuais e engajamento em redes sociais como Instagram e TikTok.</p></div>
+                                <h2 class="text-4xl font-bold mb-6" style="color: var(--primary-color);">Estratégia de Marketing 4P's</h2>
+                                <p class="max-w-4xl mx-auto mb-8 text-gray-600">Nossa abordagem integrada para criar uma marca forte, com produtos de qualidade, preços justos, distribuição eficiente e promoção digital inteligente.</p>
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">Produto</h3><p class="mt-2 text-gray-700">Comida chinesa de qualidade, com foco em sabor, apresentação e itens exclusivos.</p></div>
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">Preço</h3><p class="mt-2 text-gray-700">Acessível com combos promocionais para gerar valor percebido e fidelizar clientes.</p></div>
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">Praça</h3><p class="mt-2 text-gray-700">Atendimento 100% digital via iFood, WhatsApp e Instagram.</p></div>
+                                    <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg" style="color:var(--primary-color);">Promoção</h3><p class="mt-2 text-gray-700">Campanhas visuais e engajamento em redes sociais como Instagram e TikTok.</p></div>
                                 </div>
                             </div>`
                 },
                 {
                     title: "Finanças: Investimento e Receita",
                     content: `<div class="w-full">
-                                <h2 class="text-3xl font-bold text-center mb-4" style="color: var(--primary-color);">Projeções Financeiras: Visão Geral</h2>
-                                <div class="grid grid-cols-2 gap-8 items-center">
-                                    <div><h3 class="text-md font-bold text-center mb-2">Investimento Total: R$ 19.000</h3><div class="chart-container"><canvas id="investmentChart"></canvas></div></div>
-                                    <div><h3 class="text-md font-bold text-center mb-2">Faturamento Mensal: R$ 35.300</h3><div class="chart-container"><canvas id="revenueChart"></canvas></div></div>
+                                <h2 class="text-4xl font-bold text-center mb-6" style="color: var(--primary-color);">Projeções Financeiras: Visão Geral</h2>
+                                <div class="grid grid-cols-2 gap-12 items-center">
+                                    <div><div class="chart-container"><canvas id="investmentChart"></canvas></div></div>
+                                    <div><div class="chart-container"><canvas id="revenueChart"></canvas></div></div>
                                 </div>
                              </div>`,
                     init: () => {
-                        createChart('investmentChart', 'doughnut', { labels: ['Investimentos Fixos', 'Pré-Operacional', 'Capital de Giro'], datasets: [{ data: [11000, 5000, 3000], backgroundColor: ['#601410', '#d97706', '#f59e0b'] }] });
-                        createChart('revenueChart', 'bar', { labels: ['Combo Família', 'Yakisoba Camarão', 'Yakisoba Frango', 'Outros'], datasets: [{ label: 'Faturamento (R$)', data: [8800, 5390, 5250, 15860], backgroundColor: '#d97706' }] });
+                        createChart('investmentChart', 'doughnut', { labels: ['Investimentos Fixos', 'Pré-Operacional', 'Capital de Giro'], datasets: [{ data: [11000, 5000, 3000], backgroundColor: ['#601410', '#d97706', '#f59e0b'] }] }, 'Investimento Total: R$ 19.000');
+                        createChart('revenueChart', 'bar', { labels: ['Combo Família', 'Yakisoba Camarão', 'Yakisoba Frango', 'Outros'], datasets: [{ label: 'Faturamento', data: [8800, 5390, 5250, 15860], backgroundColor: '#d97706' }] }, 'Faturamento Mensal: R$ 35.300');
                     }
                 },
                 {
                     title: "Finanças: Custos e Metas",
                      content: `<div class="w-full">
-                                <h2 class="text-3xl font-bold text-center mb-4" style="color: var(--primary-color);">Projeções Financeiras: Custos e Metas</h2>
-                                <div class="grid grid-cols-2 gap-8 items-center">
-                                    <div><h3 class="text-md font-bold text-center mb-2">Custo Fixo Mensal: R$ 1.592,90</h3><div class="chart-container"><canvas id="costsChart"></canvas></div></div>
-                                    <div class="text-center space-y-6">
-                                        <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold">Meta de Pedidos</h3><p class="text-2xl font-bold" style="color:var(--primary-color);">100-150 /mês</p><p class="text-xs">(1º Trimestre)</p></div>
-                                        <div class="bg-amber-50 p-4 rounded-lg"><h3 class="font-bold">Meta de Ponto de Equilíbrio</h3><p class="text-2xl font-bold" style="color:var(--primary-color);">6º Mês</p><p class="text-xs">de operação</p></div>
+                                <h2 class="text-4xl font-bold text-center mb-6" style="color: var(--primary-color);">Projeções Financeiras: Custos e Metas</h2>
+                                <div class="grid grid-cols-2 gap-12 items-center">
+                                    <div><div class="chart-container"><canvas id="costsChart"></canvas></div></div>
+                                    <div class="text-center space-y-8">
+                                        <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg">Meta de Pedidos</h3><p class="text-3xl font-bold" style="color:var(--primary-color);">100-150 /mês</p><p class="text-sm">(1º Trimestre)</p></div>
+                                        <div class="bg-amber-50 p-6 rounded-xl shadow-sm"><h3 class="font-bold text-lg">Meta de Ponto de Equilíbrio</h3><p class="text-3xl font-bold" style="color:var(--primary-color);">6º Mês</p><p class="text-sm">de operação</p></div>
                                     </div>
                                 </div>
                              </div>`,
                     init: () => {
-                         createChart('costsChart', 'pie', { labels: ['Gás', 'Energia', 'Embalagens', 'Outros'], datasets: [{ data: [420, 380, 300, 492.90], backgroundColor: ['#601410', '#d97706', '#f59e0b', '#f97316'] }] });
+                         createChart('costsChart', 'pie', { labels: ['Gás', 'Energia', 'Embalagens', 'Outros'], datasets: [{ data: [420, 380, 300, 492.90], backgroundColor: ['#601410', '#d97706', '#f59e0b', '#f97316'] }] }, 'Custo Fixo Mensal: R$ 1.592,90');
                     }
                 },
                 {
                     title: "Custos Detalhados",
                     content: `<div class="w-full">
-                                <h2 class="text-3xl font-bold text-center mb-4" style="color: var(--primary-color);">Análise de Custos Detalhada</h2>
-                                <div class="grid grid-cols-2 gap-8 items-start">
-                                    <div><h3 class="text-md font-bold text-center mb-2">Custo com Matéria-Prima</h3><div class="chart-container"><canvas id="materialsChart"></canvas></div></div>
-                                    <div><h3 class="text-md font-bold text-center mb-2">Custo com Mão de Obra</h3><table class="table-custom"><thead><tr><th>Função</th><th>Total (R$)</th></tr></thead><tbody><tr><td>Ajudante de Cozinha</td><td>1.776,00</td></tr><tr><td>Motoboy (Autônomo)</td><td>1.500,00</td></tr></tbody><tfoot><tr><td class="font-bold">Total</td><td class="font-bold">3.276,00</td></tr></tfoot></table></div>
+                                <h2 class="text-4xl font-bold text-center mb-6" style="color: var(--primary-color);">Análise de Custos Detalhada</h2>
+                                <div class="grid grid-cols-2 gap-12 items-start">
+                                    <div><h3 class="text-xl font-bold text-center mb-4">Custo com Matéria-Prima</h3><div class="chart-container"><canvas id="materialsChart"></canvas></div></div>
+                                    <div><h3 class="text-xl font-bold text-center mb-4">Custo com Mão de Obra</h3><div class="bg-white p-4 rounded-lg shadow-md"><table class="table-custom"><thead><tr><th>Função</th><th>Total (R$)</th></tr></thead><tbody><tr><td>Ajudante de Cozinha</td><td>1.776,00</td></tr><tr><td>Motoboy (Autônomo)</td><td>1.500,00</td></tr></tbody><tfoot><tr><td class="font-bold">Total</td><td class="font-bold">3.276,00</td></tr></tfoot></table></div></div>
                                 </div>
                             </div>`,
                     init: () => {
-                         createChart('materialsChart', 'bar', { labels: ['Refrigerante', 'Frango', 'Camarão', 'Outros'], datasets: [{ label: 'Custo (R$)', data: [1125, 300, 225, 511.5], backgroundColor: '#f59e0b' }] });
+                         createChart('materialsChart', 'bar', { labels: ['Refrigerante', 'Frango', 'Camarão', 'Outros'], datasets: [{ label: 'Custo', data: [1125, 300, 225, 511.5], backgroundColor: '#f59e0b' }] });
                     }
                 },
                 {
                     title: "Plano Operacional",
                     content: `<div class="w-full text-center">
-                                <h2 class="text-3xl font-bold mb-4" style="color: var(--primary-color);">Plano Operacional</h2>
-                                <h3 class="font-bold mb-4">Fluxo Simplificado do Pedido</h3>
-                                <div class="flex justify-center items-center space-x-4 text-xs font-semibold">
-                                    <div><div class="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-1">📱</div><p>1. Recebimento</p></div>
-                                    <div class="text-gray-300">▶</div>
-                                    <div><div class="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-1">🍳</div><p>2. Preparo</p></div>
-                                    <div class="text-gray-300">▶</div>
-                                    <div><div class="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-1">📦</div><p>3. Embalagem</p></div>
-                                    <div class="text-gray-300">▶</div>
-                                    <div><div class="bg-amber-100 rounded-full w-16 h-16 flex items-center justify-center mb-1">🛵</div><p>4. Entrega</p></div>
-                                </div>
-                                <h3 class="font-bold mt-8 mb-4">Nossa Equipe</h3>
-                                <div class="grid grid-cols-4 gap-4 text-xs">
-                                    <div><p class="font-bold">Gerente/Proprietário</p><p>Gestão e Compras</p></div>
-                                    <div><p class="font-bold">Cozinheiro Principal</p><p>Preparo e Qualidade</p></div>
-                                    <div><p class="font-bold">Auxiliar de Cozinha</p><p>Apoio e Embalagem</p></div>
-                                    <div><p class="font-bold">Entregador Autônomo</p><p>Logística</p></div>
-                                </div>
+                                <h2 class="text-4xl font-bold mb-6" style="color: var(--primary-color);">Plano Operacional</h2>
+                                <div class="mb-10"><h3 class="text-xl font-bold mb-4">Fluxo Simplificado do Pedido</h3>
+                                <div class="flex justify-center items-center space-x-6 font-semibold">
+                                    <div class="text-center"><div class="bg-amber-100 rounded-full w-20 h-20 flex items-center justify-center mb-2 text-3xl">📱</div><p>1. Recebimento</p></div>
+                                    <div class="text-gray-400 font-bold text-2xl">→</div>
+                                    <div class="text-center"><div class="bg-amber-100 rounded-full w-20 h-20 flex items-center justify-center mb-2 text-3xl">🍳</div><p>2. Preparo</p></div>
+                                    <div class="text-gray-400 font-bold text-2xl">→</div>
+                                    <div class="text-center"><div class="bg-amber-100 rounded-full w-20 h-20 flex items-center justify-center mb-2 text-3xl">📦</div><p>3. Embalagem</p></div>
+                                    <div class="text-gray-400 font-bold text-2xl">→</div>
+                                    <div class="text-center"><div class="bg-amber-100 rounded-full w-20 h-20 flex items-center justify-center mb-2 text-3xl">🛵</div><p>4. Entrega</p></div>
+                                </div></div>
+                                <div><h3 class="text-xl font-bold mt-8 mb-4">Nossa Equipe</h3>
+                                <div class="grid grid-cols-4 gap-4">
+                                    <div class="bg-gray-100 p-4 rounded-lg"><p class="font-bold">Gerente/Proprietário</p><p class="text-sm text-gray-600">Gestão e Compras</p></div>
+                                    <div class="bg-gray-100 p-4 rounded-lg"><p class="font-bold">Cozinheiro Principal</p><p class="text-sm text-gray-600">Preparo e Qualidade</p></div>
+                                    <div class="bg-gray-100 p-4 rounded-lg"><p class="font-bold">Auxiliar de Cozinha</p><p class="text-sm text-gray-600">Apoio e Embalagem</p></div>
+                                    <div class="bg-gray-100 p-4 rounded-lg"><p class="font-bold">Entregador Autônomo</p><p class="text-sm text-gray-600">Logística</p></div>
+                                </div></div>
                             </div>`
                 },
                 {
                     title: "Conclusão",
                     content: `<div class="text-center">
-                                <h2 class="text-3xl font-bold mb-4" style="color: var(--primary-color);">Conclusão</h2>
-                                <p class="max-w-2xl mx-auto text-gray-700">O Moday Restaurante apresenta um plano de negócio sólido, com forte potencial de crescimento em um mercado promissor. Com foco em qualidade, eficiência operacional e marketing digital inteligente, estamos posicionados para nos tornarmos uma referência em delivery de comida chinesa em Salvador.</p>
+                                <h2 class="text-4xl font-bold mb-6" style="color: var(--primary-color);">Conclusão</h2>
+                                <p class="max-w-3xl mx-auto text-gray-700 leading-relaxed">O Moday Restaurante apresenta um plano de negócio sólido, com forte potencial de crescimento em um mercado promissor. Com foco em qualidade, eficiência operacional e marketing digital inteligente, estamos posicionados para nos tornarmos uma referência em delivery de comida chinesa em Salvador.</p>
                              </div>`
                 },
                 {
                     title: "Encerramento",
                     content: `<div class="text-center">
-                                <h2 class="text-5xl font-bold" style="color: var(--primary-color);">Obrigado!</h2>
-                                <p class="mt-4 text-lg">Contato: (71) 98724-1821 | @modayrestaurante</p>
+                                <h2 class="text-6xl font-bold" style="color: var(--primary-color);">Obrigado!</h2>
+                                <p class="mt-4 text-2xl">Contato: (71) 98724-1821 | @modayrestaurante</p>
                             </div>`
                 }
             ];
@@ -213,7 +221,7 @@
             let activeSlideIndex = 0;
             let chartInstances = {};
 
-            const createChart = (canvasId, type, data) => {
+            const createChart = (canvasId, type, data, titleText) => {
                 if (chartInstances[canvasId]) {
                     chartInstances[canvasId].destroy();
                 }
@@ -222,7 +230,34 @@
                     chartInstances[canvasId] = new Chart(ctx, {
                         type,
                         data,
-                        options: { responsive: true, maintainAspectRatio: false }
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: titleText,
+                                    font: { size: 16, weight: 'bold' },
+                                    padding: { top: 10, bottom: 20 }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            if (label) {
+                                                label += ': ';
+                                            }
+                                            if (context.parsed.y !== null) {
+                                                label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed.y);
+                                            } else if (context.parsed !== null) {
+                                                 label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed);
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     });
                 }
             };
@@ -239,22 +274,23 @@
                 thumbnails[activeSlideIndex].classList.add('active');
                 mainSlides[activeSlideIndex].classList.add('active');
 
-                if (slidesData[activeSlideIndex].init) {
-                    slidesData[activeSlideIndex].init();
-                }
+                // Atraso para renderizar o gráfico após a transição do slide
+                setTimeout(() => {
+                    if (slidesData[activeSlideIndex].init) {
+                        slidesData[activeSlideIndex].init();
+                    }
+                }, 100);
             };
 
             slidesData.forEach((slide, index) => {
-                // Criar miniatura
                 const thumb = document.createElement('div');
-                thumb.className = 'slide-thumbnail bg-white p-2 rounded-md shadow';
-                thumb.innerHTML = `<p class="text-sm font-semibold text-gray-800">${index + 1}. ${slide.title}</p>`;
+                thumb.className = 'slide-thumbnail bg-white p-2 rounded-lg shadow-sm';
+                thumb.innerHTML = `<div class="text-xs font-bold text-gray-500 mb-1">SLIDE ${index + 1}</div><p class="text-sm font-semibold text-gray-800">${slide.title}</p>`;
                 thumb.addEventListener('click', () => showSlide(index));
                 thumbnailContainer.appendChild(thumb);
 
-                // Criar slide principal
                 const mainSlide = document.createElement('div');
-                mainSlide.className = 'slide-main w-full h-full items-center justify-center';
+                mainSlide.className = 'slide-main w-full h-full items-center justify-center p-6';
                 mainSlide.innerHTML = slide.content;
                 mainSlideContainer.appendChild(mainSlide);
             });
